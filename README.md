@@ -57,26 +57,26 @@ USE ecommerce_sales
 -- Note: Modify the path and format accordingly for your SQL Server/Environment
 
 
- -- Total Sales Revenue
+-- Total Sales Revenue
 SELECT SUM(total_sale_amount) AS total_revenue
 FROM ecommerce_data;
 
 
-  --  Sales by Continent
+--  Sales by Continent
 SELECT continent, SUM(total_sale_amount) AS total_sales
 FROM ecommerce_data
 GROUP BY continent
 ORDER BY total_sales DESC;
 
 
-  -- Total Order & Sales BY Payment Methods
+-- Total Order & Sales BY Payment Methods
 SELECT payment_method, COUNT(order_id) AS total_orders, SUM(total_sale_amount) AS total_sales
 FROM ecommerce_data
 GROUP BY payment_method
 ORDER BY total_sales DESC;
 
 
-  -- Number of Transactions BY Payment Methods
+-- Number of Transactions BY Payment Methods
 SELECT payment_method, COUNT(*) AS number_of_transactions
 FROM ecommerce_data
 GROUP BY payment_method
@@ -90,26 +90,26 @@ GROUP BY product_name
 ORDER BY total_quantity_sold DESC;
 
 
-  -- Top 5 Customer by Spending
+-- Top 5 Customer by Spending
 SELECT TOP 5 customer_id, SUM(total_sale_amount) AS total_spent
 FROM ecommerce_data
 GROUP BY customer_id
 ORDER BY total_spent DESC;
 
 
-  -- Total Sale By Category
+-- Total Sale By Category
 SELECT category, SUM(total_sale_amount) AS total_sales
 FROM ecommerce_data
 GROUP BY category
 ORDER BY total_sales DESC;
 
 
-  -- Average Sale Value
+-- Average Sale Value
 SELECT AVG(total_sale_amount) AS avg_sale_value
 FROM ecommerce_data;
 
 
-  -- Monthly Sales
+-- Monthly Sales
 SELECT 
     CAST(YEAR(date) AS VARCHAR(4)) + '-' + RIGHT('0' + CAST(MONTH(date) AS VARCHAR(2)), 2) AS month,
     SUM(total_sale_amount) AS monthly_sales
@@ -118,7 +118,7 @@ GROUP BY YEAR(date), MONTH(date)
 ORDER BY month;
 
 
-  -- Percentage of Orders by Payment Status
+-- Percentage of Orders by Payment Status
 SELECT payment_status, COUNT(*) * 100.0 / (SELECT COUNT(*) FROM ecommerce_data) AS percentage_of_orders
 FROM ecommerce_data
 GROUP BY payment_status;
